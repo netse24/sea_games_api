@@ -21,6 +21,8 @@ return new class extends Migration
                 ->references('id')
                 ->on('stadiums')
                 ->onDelete('cascade');
+
+                
             $table->timestamps();
         });
     }

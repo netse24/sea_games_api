@@ -22,11 +22,18 @@ return new class extends Migration
                 ->on('zones')
                 ->onDelete('cascade');
 
-            // relationship one to many between event and zone 
-            $table->unsignedBigInteger('event_id');
-            $table->foreign('event_id')
+            // relationship one to many between competition and ticket 
+            $table->unsignedBigInteger('competition_id');
+            $table->foreign('competition_id')
                 ->references('id')
-                ->on('events')
+                ->on('competitions')
+                ->onDelete('cascade');
+
+            // relationship one to many between schedule and ticket 
+            $table->unsignedBigInteger('schedule_id');
+            $table->foreign('schedule_id')
+                ->references('id')
+                ->on('schedules')
                 ->onDelete('cascade');
 
             $table->timestamps();
