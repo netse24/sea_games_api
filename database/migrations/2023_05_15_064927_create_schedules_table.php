@@ -14,6 +14,19 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->dateTime('date_time');
+
+            $table->unsignedBigInteger('competition_id');
+            $table->foreignKey('competition_id')
+                ->references('id')
+                ->on('competitions')
+                ->onDelete('cascade');
+
+            $table->unsignedBigInteger('ticket_id');
+            $table->foreignKey('ticket_id')
+                ->references('id')
+                ->on('tickets')
+                ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

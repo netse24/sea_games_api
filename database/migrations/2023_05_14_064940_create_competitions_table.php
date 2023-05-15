@@ -22,19 +22,6 @@ return new class extends Migration
                 ->on('events')
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger('stadium_id');
-            $table->foreign('stadium_id')
-                ->references('id')
-                ->on('stadiums')
-                ->onDelete('cascade');
-
-            $table->unsignedBigInteger('schedule_id');
-            $table->foreign('schedule_id')
-                ->references('id')
-                ->on('schedules')
-                ->onDelete('cascade');
-
-
             $table->timestamps();
         });
     }
