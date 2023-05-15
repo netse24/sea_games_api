@@ -15,10 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('zone_name');
             $table->integer('number_ticket');
-            
+
             // relationship one to many between zones and stadium
             $table->unsignedBigInteger('stadium_id');
-            $table-> foreign('stadium_id')->references('id')->on('stadiums')->onDelete('cascade');
+            $table->foreign('stadium_id')
+                ->references('id')
+                ->on('stadia')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

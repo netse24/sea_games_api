@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Stadium;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class StadiumController extends Controller
 {
@@ -12,7 +14,8 @@ class StadiumController extends Controller
      */
     public function index()
     {
-        //
+        $stadium = Stadium::all();
+        return response()->json(array('message' => 'success', 'data' => $stadium), 200);
     }
 
     /**
@@ -28,7 +31,24 @@ class StadiumController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // TODO create a stadium controller
+
+        // $validator = $request->validate([
+        //     'stadium_name' => 'required|min:2',
+        //     'location' => 'required|min:2',
+        // ]);
+
+        $validator = Validator::make($request->all(), [
+            'stadium_name' => 'required|min:2',
+            'location' => 'required|min:2',
+        ]);
+
+        if ($validator->fails()) {
+            return $validator->errors();
+        }
+        $stadium = Stadium::create($validator->validated());
+
+        return response()->json(array('message' => 'Created suceessfully', 'post' => $stadium), 200);
     }
 
     /**

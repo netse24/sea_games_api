@@ -13,9 +13,14 @@ class Stadium extends Model
         'stadium_name',
         'location'
     ];
-
     public function competition(): HasMany
     {
         return $this->hasMany(Competition::class);
+    }
+   
+
+    public function event(): HasMany
+    {
+        return $this->hasMany(Event::class);
     }
 }

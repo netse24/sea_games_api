@@ -16,13 +16,13 @@ return new class extends Migration
             $table->dateTime('date_time');
 
             $table->unsignedBigInteger('competition_id');
-            $table->foreignKey('competition_id')
+            $table->foreign('competition_id')
                 ->references('id')
                 ->on('competitions')
                 ->onDelete('cascade');
 
             $table->unsignedBigInteger('ticket_id');
-            $table->foreignKey('ticket_id')
+            $table->foreign('ticket_id')
                 ->references('id')
                 ->on('tickets')
                 ->onDelete('cascade');

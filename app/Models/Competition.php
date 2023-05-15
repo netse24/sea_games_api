@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Competition extends Model
@@ -14,9 +15,9 @@ class Competition extends Model
         'event_id'
     ];
 
-    public function event(): HasOne
+    public function event(): BelongsTo
     {
-        return $this->hasOne(Event::class);
+        return $this->belongsTo(Event::class);
     }
 
     public function stadium(): HasOne

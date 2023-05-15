@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Competition;
+use App\Models\Zone;
 use Illuminate\Http\Request;
 
-class CompetitionController extends Controller
+class ZoneController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,6 @@ class CompetitionController extends Controller
     public function index()
     {
         //
-        return Competition::all();
     }
 
     /**
@@ -35,7 +34,7 @@ class CompetitionController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Competition $competition)
+    public function show(Zone $zone)
     {
         //
     }
@@ -43,7 +42,7 @@ class CompetitionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Competition $competition)
+    public function edit(Zone $zone)
     {
         //
     }
@@ -51,7 +50,7 @@ class CompetitionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Competition $competition)
+    public function update(Request $request, Zone $zone)
     {
         //
     }
@@ -59,7 +58,7 @@ class CompetitionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Competition $competition)
+    public function destroy(Zone $zone)
     {
         //
     }

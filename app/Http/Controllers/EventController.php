@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\EventResource;
 use App\Models\Event;
+use App\Models\Stadium;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -34,7 +35,14 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // TODO: create a new events 
+
+        $data = Event::create([
+            'event_type' => $request->event_type,
+            'stadium_id' => $request->stadium_id,
+        ]);
+
+        return response()->json(array('message' => 'Created successfully', 'data' => $data), 200);
     }
 
     /**
@@ -42,17 +50,14 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        //TODO get event details
-        $id = $event->id;
-        $detail = Event::join('competitions', 'events.id','=','competitions.event_id')
-        ->join('stadiums', 'stadiums.id','=','competitions.stadium_id')
-        ->get(['events.*', 'competitions.*','stadiums.*']);
-        
-        return $detail;
+        //TODO get event details 
 
-        // Model1::join('table2', 'table1.column', '=', 'table2.column')
-        //         ->select('table1.*', 'table2.*')
-        //         ->get();
+        $detail = Event::join('competitions', 'events.id', '=', 'competitions.event_id')->where('events.id', '=', $event->id)
+            ->join('stadia', 'stadia.id', '=', 'events.stadium_id')
+            ->join('schedules', 'schedules.competition_id', '=', 'competitions.id')
+            ->get(['events.*', 'competitions.*', 'stadia.*', 'schedules.*']);
+
+        return response()->json(array('message' => 'success', 'data' => $detail), 200);
     }
 
     /**
@@ -68,7 +73,18 @@ class EventController extends Controller
      */
     public function update(Request $request, Event $event)
     {
-        //
+        //TODO update an event 
+
+        $update =  Event::where('id', '=', $event->id)->update([
+            'event_type' => $request->event_type,
+            'stadium_id' => $request->stadium_id
+        ]);
+
+        $stadium  = Stadium::where('id', '=', $event->stadium_id)->update([
+            'stadium_name' => $request->stadium_name,
+            'location' => $request->location,
+        ]);
+        return response()->json(array('message' => 'success update stadium and event'), 200);
     }
 
     /**
@@ -76,6 +92,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $delete = Event::find($event->id)->delete();
+        return response()->json(array('message' => 'deleted successfully','dataDelete'=>$delete), 200);
     }
 }
