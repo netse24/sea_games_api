@@ -37,6 +37,7 @@ class TicketController extends Controller
                 if (count($tickets) < $zone->number_ticket) {
                     $isTrue = true;
                 }
+            
             }
         }
 
@@ -46,6 +47,8 @@ class TicketController extends Controller
                 'zone_id' => $request->zone_id,
                 'event_id' => $request->event_id,
             ]);
+        }else{
+            return 'zone is not available';
         }
     }
 
